@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+npm-debug.log*
+.env
+.DS_Store # macOS specific
+*.log
+pids/
+logs/
+*.pid
+*.seed
+*.pid.lock
+.npm/ # Optional npm cache directory
+.eslintcache # Optional eslint cache
+.node_repl_history # Optional REPL history
