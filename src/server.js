@@ -6,6 +6,7 @@ import PastEventRouter from "./routes/PastEventsRoutes.js";
 import StorageRouter from "./routes/StorageRoutes.js";
 import UserRouter from "./routes/UserRoutes.js"
 import ViewRouter from "./routes/ViewRoutes.js"
+import ImageRouter from "./routes/ImageRoutes.js"
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,7 +31,8 @@ app.use("/newevents", NewEventRouter);
 app.use("/pastevents", PastEventRouter);
 app.use("/storage", StorageRouter);
 app.use("/user", UserRouter);
-app.use("/view", ViewRouter)
+app.use("/view", ViewRouter);
+app.use("/images", ImageRouter);
 
 app.listen(port, host, () => {
     console.log(`Example app listening on http://${host}:${port}/`);
