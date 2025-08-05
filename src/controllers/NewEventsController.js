@@ -1,19 +1,43 @@
-import { supabase } from "../database/connect.js";
+import NewEventsService from "../services/NewEventsService.js";
 
-const getAllNewEvents = async (req, res) => {
+const getAllNewEvents = async (_, res) => {
     try {
-        const { data, error } = await supabase.from("new_events").select();
+        NewEventsService.getAllNewEvents((data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
+            if (!data) {
+                return res.status(404).send("Events not found.");
+            }
 
-        if (!data) {
-            return res.status(404).send("Events not found.");
-        }
+            return res.send(data);
+        });
+    } catch (err) {
+        console.error("Unexpected error:", err);
+        res.status(500).send("An unexpected error occurred.");
+    }
+};
 
-        return res.send(data);
+const getCountNewEvents = async (req, res) => {
+    const {
+        params: { newEventCount },
+    } = req;
+
+    try {
+        NewEventsService.getCountNewEvents(newEventCount, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
+
+            if (!data) {
+                return res.status(404).send("Events not found.");
+            }
+
+            return res.send(data);
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -26,21 +50,18 @@ const getOneNewEvent = async (req, res) => {
     } = req;
 
     try {
-        const { data, error } = await supabase
-            .from("new_events")
-            .select()
-            .eq("id", newEventId);
+        NewEventsService.getOneNewEvent(newEventId, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
+            if (!data) {
+                return res.status(404).send("Event not found.");
+            }
 
-        if (!data) {
-            return res.status(404).send("Event not found.");
-        }
-
-        return res.send(data);
+            return res.send(data);
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -51,16 +72,14 @@ const createNewEvent = async (req, res) => {
     const { body } = req;
 
     try {
-        const { error } = await supabase
-            .from("new_events")
-            .insert(body)
+        NewEventsService.createNewEvent(body, (_, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly created");
+            return res.status(201).send("Successfuly created");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -74,17 +93,14 @@ const updateNewEvent = async (req, res) => {
     } = req;
 
     try {
-        const { error } = await supabase
-            .from("new_events")
-            .update(body)
-            .eq("id", newEventId)
+        NewEventsService.updateNewEvent(newEventId, body, (_, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly updated");
+            return res.status(201).send("Successfuly updated");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -97,17 +113,14 @@ const deleteNewEvent = async (req, res) => {
     } = req;
 
     try {
-        const { error } = await supabase
-            .from("new_events")
-            .delete()
-            .eq("id", newEventId)
+        NewEventsService.deleteNewEvent(newEventId, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly deleted");
+            return res.status(201).send("Successfuly deleted");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -116,6 +129,7 @@ const deleteNewEvent = async (req, res) => {
 
 export default {
     getAllNewEvents,
+    getCountNewEvents,
     getOneNewEvent,
     createNewEvent,
     updateNewEvent,

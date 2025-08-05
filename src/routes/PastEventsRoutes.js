@@ -4,6 +4,7 @@ import PastEventsController from "../controllers/PastEventsController.js";
 const router = Router();
 
 router.get("/", PastEventsController.getAllPastEvents);
+router.get("/count/:pastEventCount", PastEventsController.getCountPastEvents);
 router.get("/:pastEventId", PastEventsController.getOnePastEvent);
 router.post("/", PastEventsController.createPastEvent);
 router.patch("/:pastEventId", PastEventsController.updatePastEvent);

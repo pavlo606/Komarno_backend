@@ -1,19 +1,43 @@
-import { supabase } from "../database/connect.js";
+import PastEventsService from "../services/PastEventsService.js";
 
-const getAllPastEvents = async (req, res) => {
+const getAllPastEvents = async (_, res) => {
     try {
-        const { data, error } = await supabase.from("past_events").select();
+        PastEventsService.getAllPastEvents((data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
+            if (!data) {
+                return res.status(404).send("Events not found.");
+            }
 
-        if (!data) {
-            return res.status(404).send("Events not found.");
-        }
+            return res.send(data);
+        });
+    } catch (err) {
+        console.error("Unexpected error:", err);
+        res.status(500).send("An unexpected error occurred.");
+    }
+};
 
-        return res.send(data);
+const getCountPastEvents = async (req, res) => {
+    const {
+        params: { pastEventCount },
+    } = req;
+
+    try {
+        PastEventsService.getCountPastEvents(pastEventCount, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
+
+            if (!data) {
+                return res.status(404).send("Events not found.");
+            }
+
+            return res.send(data);
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -26,21 +50,18 @@ const getOnePastEvent = async (req, res) => {
     } = req;
 
     try {
-        const { data, error } = await supabase
-            .from("past_events")
-            .select()
-            .eq("id", pastEventId);
+        PastEventsService.getOnePastEvent(pastEventId, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
+            if (!data) {
+                return res.status(404).send("Event not found.");
+            }
 
-        if (!data) {
-            return res.status(404).send("Event not found.");
-        }
-
-        return res.send(data);
+            return res.send(data);
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -51,16 +72,14 @@ const createPastEvent = async (req, res) => {
     const { body } = req;
 
     try {
-        const { error } = await supabase
-            .from("past_events")
-            .insert(body)
+        PastEventsService.createPastEvent(body, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly created");
+            return res.status(201).send("Successfuly created");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -74,17 +93,14 @@ const updatePastEvent = async (req, res) => {
     } = req;
 
     try {
-        const { error } = await supabase
-            .from("past_events")
-            .update(body)
-            .eq("id", pastEventId)
+        PastEventsService.updatePastEvent(pastEventId, body, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly updated");
+            return res.status(201).send("Successfuly updated");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -97,17 +113,14 @@ const deletePastEvent = async (req, res) => {
     } = req;
 
     try {
-        const { error } = await supabase
-            .from("past_events")
-            .delete()
-            .eq("id", pastEventId)
+        PastEventsService.deletePastEvent(pastEventId, (data, error) => {
+            if (error) {
+                console.error("Error: ", error);
+                return res.status(500).send(`Error: ${error.message}`);
+            }
 
-        if (error) {
-            console.error("Error: ", error);
-            return res.status(500).send(`Error: ${error.message}`);
-        }
-
-        return res.status(201).send("Successfuly deleted");
+            return res.status(201).send("Successfuly deleted");
+        });
     } catch (err) {
         console.error("Unexpected error:", err);
         res.status(500).send("An unexpected error occurred.");
@@ -116,6 +129,7 @@ const deletePastEvent = async (req, res) => {
 
 export default {
     getAllPastEvents,
+    getCountPastEvents,
     getOnePastEvent,
     createPastEvent,
     updatePastEvent,
