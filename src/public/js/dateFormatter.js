@@ -28,16 +28,6 @@ const monthsGenitiveEN = [
     "December",
 ];
 
-const newEventForm = document.getElementById("newEventForm");
-const newEventsContainer = document.getElementById("newEventsContainer");
-const formTitle = document.getElementById("formTitle");
-const btnCreate = document.getElementById("btnCreate");
-const btnEdit = document.getElementById("btnEdit");
-const btnCancelEdit = document.getElementById("btnCancelEdit");
-
-let editMode = false;
-let editElementId = null;
-
 function format(str, values) {
     return str.replace(/{(\w+)}/g, function (match, index) {
         return typeof values[index] !== "undefined" ? values[index] : match;

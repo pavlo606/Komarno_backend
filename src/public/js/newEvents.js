@@ -1,3 +1,14 @@
+const newEventForm = document.getElementById("newEventForm");
+const newEventsContainer = document.getElementById("newEventsContainer");
+const newEventPreview = document.getElementById("newEventPreview");
+const formTitle = document.getElementById("formTitle");
+const btnCreate = document.getElementById("btnCreate");
+const btnEdit = document.getElementById("btnEdit");
+const btnCancelEdit = document.getElementById("btnCancelEdit");
+
+let editMode = false;
+let editElementId = null;
+
 const onEditNewEvent = (element) => {
     window.scrollTo({
         top: 0,
@@ -27,6 +38,7 @@ const startEditMode = (element) => {
     btnCreate.classList.add("hidden");
     btnCancelEdit.classList.remove("hidden");
     btnEdit.classList.remove("hidden");
+    newEventPreview.classList.add("hidden");
     formTitle.innerHTML = `Редагування події ${element.id}`;
 };
 
@@ -46,7 +58,22 @@ const endEditMode = () => {
     btnCreate.classList.remove("hidden");
     btnCancelEdit.classList.add("hidden");
     btnEdit.classList.add("hidden");
+    newEventPreview.classList.remove("hidden");
     formTitle.innerHTML = `Створення нової майбутньої події`;
+};
+
+const saveChanges = async (obj) => {
+    const response = await fetch("/newevents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(obj),
+    });
+
+    if (response.ok) {
+        location.reload();
+    } else {
+        alert("Error");
+    }
 };
 
 newEventForm.addEventListener("submit", async function (e) {
@@ -68,18 +95,55 @@ newEventForm.addEventListener("submit", async function (e) {
             alert("Error");
         }
     } else {
-        const response = await fetch("/newevents", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(obj),
-        });
-
-        if (response.ok) {
-            location.reload();
-        } else {
-            alert("Error");
-        }
+        newEventPreview.innerHTML = `
+        <div class="eventlist-element-container">
+            <div class="eventlist-element">
+                <p class="eventlist-element-title">
+                    ${obj.title}
+                </p>
+                <p class="eventlist-element-date">
+                    ${dateFormatter(obj.date, "{d} {M}, {Y}")}
+                </p>
+                <p class="eventlist-element-text">
+                    ${obj.description}
+                </p>
+            </div>
+            <div>
+                <button onclick='openModal(${JSON.stringify(
+                    obj
+                )})' class="btn-more">Детальніше</button>
+                <button onclick='saveChanges(${JSON.stringify(
+                    obj
+                )})' class="btn-more green">Зберегти</button>
+            </div>
+        </div>
+    `;
     }
+    // if (editMode && editElementId) {
+    //     const response = await fetch(`/newevents/${editElementId}`, {
+    //         method: "PATCH",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(obj),
+    //     });
+
+    //     if (response.ok) {
+    //         location.reload();
+    //     } else {
+    //         alert("Error");
+    //     }
+    // } else {
+    //     const response = await fetch("/newevents", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(obj),
+    //     });
+
+    //     if (response.ok) {
+    //         location.reload();
+    //     } else {
+    //         alert("Error");
+    //     }
+    // }
 });
 
 fetch("/newevents", { method: "GET" })
