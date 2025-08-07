@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Нові події</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/newEvents.css" />
+        <link rel="stylesheet" href="/css/modal.css" />
+        <link rel="stylesheet" href="/css/modalNewEvent.css" />
+    </head>
+    <body>
+        <a href="/view">На головну</a>
+        <div class="container">
+            <form id="newEventForm" class="newevent-form">
+                <h2 id="formTitle">Створення нової майбутньої події</h2>
+                <input
+                    id="title"
+                    type="text"
+                    name="title"
+                    placeholder="Заголовок"
+                    required
+                />
+                <textarea
+                    id="description"
+                    type="text"
+                    name="description"
+                    placeholder="Опис"
+                    rows="6"
+                    required
+                ></textarea>
+                <input id="date" type="date" name="date" required />
+                <input id="time" type="time" name="time" required />
+                <input
+                    id="location"
+                    type="text"
+                    name="location"
+                    placeholder="Локація"
+                    required
+                />
+                <input
+                    id="enter_price"
+                    type="number"
+                    name="enter_price"
+                    placeholder="Ціна"
+                    value="0"
+                    required
+                />
+                <div>
+                    <label for="registration">Потрібна реєстрація</label>
+                    <input
+                        type="checkbox"
+                        id="registration"
+                        name="registration"
+                        value="true"
+                    />
+                </div>
+
+                <input
+                    id="title_en"
+                    type="text"
+                    name="title_en"
+                    placeholder="Заголовок(на англійській)"
+                />
+                <textarea
+                    id="description_en"
+                    type="text"
+                    name="description_en"
+                    rows="6"
+                    placeholder="Опис(на англійській)"
+                ></textarea>
+                <input
+                    id="location_en"
+                    type="text"
+                    name="location_en"
+                    placeholder="Локація(на англійській)"
+                />
+                <input
+                    id="btnCreate"
+                    class="btn"
+                    type="submit"
+                    value="Створити"
+                />
+                <input
+                    id="btnEdit"
+                    class="btn hidden"
+                    type="submit"
+                    value="Редагувати"
+                />
+                <button
+                    id="btnCancelEdit"
+                    onclick="endEditMode()"
+                    class="btn hidden"
+                >
+                    Відмінити редагування
+                </button>
+                <label
+                    >*Для правильного відображення в описі має бути НЕ більше
+                    ніж 6 рядків</label
+                >
+            </form>
+            <div>
+                <h2>Нові події</h2>
+                <div id="newEventsContainer" class="eventlist"></div>
+            </div>
+            <div id="modal" class="modal">
+                <div class="modal-contanier">
+                    <div id="modalContent" class="modal-content-container">
+                        <div class="modalmore-container">
+                            <div class="modalmore-section1">
+                                <div>
+                                    <p class="modalmore-section1-title">
+                                        Більше про подію
+                                    </p>
+                                    <p class="modalmore-section1-text">
+                                        “Як не вигоріти у волонтерстві та де
+                                        шукати свою мотивацію”
+                                    </p>
+                                </div>
+                                <p class="modalmore-section1-subtext">
+                                    Комарнівський молодіжний центр Комарно, вул.
+                                    Січових Стрільців, 5, 81562
+                                </p>
+                            </div>
+                            <div class="modalmore-section2">
+                                <p>
+                                    А ми продовжуємо місяць волонтерства у
+                                    молодіжному центрі «Comrades» тому
+                                    підготували для вас крутецький тренінг “Як
+                                    не вигоріти у волонтерстві та де шукати свою
+                                    мотивацію”Проєкт «Мрій Дій Впливай»
+                                    реалізується «Комарнівським молодіжним
+                                    центром» за
+                                    підтримки @ukrainian_volunteer_service та @ngo.youth.platform
+                                </p>
+                                <div class="modalmore-section2-info-container">
+                                    <p class="modalmore-section2-info">
+                                        Дата:
+                                        <span> 27 березня, 2025 </span>
+                                    </p>
+                                    <p class="modalmore-section2-info">
+                                        Час:
+                                        <span> 18.00 </span>
+                                    </p>
+                                    <p class="modalmore-section2-info">
+                                        Локація:
+                                        <span>
+                                            Молодіжний центр, Січових Стрільців,
+                                            5
+                                        </span>
+                                    </p>
+                                    <p class="modalmore-section2-info">
+                                        Вхід:
+                                        <span> безкоштовний </span>
+                                    </p>
+                                </div>
+                                <button class="btn-yellow modalmore-section2-btn">
+                                    Зареєструватися
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btnModalClose" class="modal-close-btn">X</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/dateFormatter.js"></script>
+        <script src="/js/newEvents.js"></script>
+        <script src="/js/modal.js"></script>
+        <script src="/js/modalNewEvent.js"></script>
+    </body>
+</html>

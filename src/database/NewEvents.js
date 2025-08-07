@@ -1,7 +1,7 @@
 import { supabase } from "./connect.js";
 
 const getAllNewEvents = async (callback) => {
-    const { data, error } = await supabase.from("new_events").select();
+    const { data, error } = await supabase.from("new_events").select().order("date");
     callback(data, error);
 };
 

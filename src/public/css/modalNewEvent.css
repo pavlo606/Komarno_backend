@@ -1,0 +1,287 @@
+.modalmore-container {
+    display: flex;
+    width: 100%;
+    gap: 1.6rem;
+}
+
+.modalmore-section1 {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p {
+        margin: 0;
+    }
+}
+
+.modalmore-section2 {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    p {
+        margin: 0;
+    }
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+.modalmore-section1-title {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 150%;
+}
+
+.modalmore-section1-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 130%;
+    width: 17rem;
+}
+
+.modalmore-section1-subtext {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 140%;
+    width: 12rem;
+}
+
+.modalmore-section2-text {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 140%;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+}
+
+.modalmore-section2-info {
+    font-family: Raleway;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 130%;
+
+    > span {
+        margin-left: 0.3rem;
+        font-weight: 400;
+    }
+}
+
+.modalmore-section2-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.modalmore-section2-btn {
+    width: 17.5rem;
+}
+
+.modalmore-registration {
+    width: 60%;
+}
+
+.modalmore-form-inputs {
+    display: grid;
+    grid-template-areas:
+        "name age"
+        "phone email"
+        "where where"
+        "btn _";
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.6rem;
+    row-gap: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.modalmore-form-name {
+    grid-area: name;
+}
+
+.modalmore-form-age {
+    grid-area: age;
+}
+
+.modalmore-form-phone {
+    grid-area: phone;
+}
+
+.modalmore-form-email {
+    grid-area: email;
+}
+
+.modalmore-form-where {
+    grid-area: where;
+}
+
+.modalmore-form-btn {
+    grid-area: btn;
+}
+
+.modalmore-form-policy {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 130%;
+    color: var(--white-50);
+
+    a {
+        color: var(--white-50);
+    }
+}
+
+.modalmore-success {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modalmore-success-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 120%;
+    margin: 0;
+}
+
+.modalmore-success-text {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 120%;
+    margin-top: 2.8rem;
+    margin-bottom: 4.4rem;
+}
+
+.modalmore-mobile-address {
+    display: none;
+}
+
+.btn-yellow {
+    padding: 0.7rem 2.4rem;
+    border-radius: 2rem;
+    border: 1px solid white;
+    /* color: #262369; */
+    font-family: Raleway;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s;
+    background: #fff3c1;
+    color: #262369;
+}
+
+.btn-yellow:hover {
+    background-color: #262369;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .modalmore-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .modalmore-section1 {
+        width: 100%;
+        margin-top: 5.5rem;
+    }
+
+    .modalmore-section1-title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 120%;
+        padding-bottom: 1rem;
+    }
+
+    .modalmore-section1-text {
+        width: 100%;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 130%;
+    }
+
+    .modalmore-section2-text {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 130%;
+
+        display: block;
+    }
+
+    .modalmore-section2-info-container {
+        margin-top: 1.5rem;
+    }
+
+    .modalmore-section2 {
+        width: 100%;
+        gap: 2.5rem;
+        margin-bottom: 9rem;
+    }
+
+    .modalmore-section2-info-container {
+        gap: 0.5rem;
+    }
+
+    .modalmore-section1-subtext {
+        display: none;
+    }
+
+    .modalmore-section2-btn {
+        margin: auto;
+    }
+
+    .modalmore-registration {
+        width: 100%;
+    }
+
+    .modalmore-form-inputs {
+        display: flex;
+        flex-direction: column;
+        /* width: 100%; */
+    }
+
+    .modalmore-form-btn {
+        margin-top: 0.64rem;
+    }
+
+    .modalmore-form-policy {
+        font-size: 0.8125rem;
+        font-weight: 400;
+        line-height: 130%;
+    }
+
+    .modalmore-success-title {
+        font-size: 1.875rem;
+        font-weight: 800;
+        line-height: 120%;
+    }
+
+    .modalmore-success {
+        height: 80vh;
+    }
+
+    .modalmore-success-text {
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .modalmore-success-btn {
+        width: 100%;
+    }
+
+    .modalmore-mobile-address {
+        display: block;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 140%;
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+}

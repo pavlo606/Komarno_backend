@@ -6,10 +6,10 @@ import { requireAuth } from "../middleware/Auth.js";
 const router = Router();
 
 router.get("/", ErrorHandler, NewEventsController.getAllNewEvents);
-router.get("/count/:newEventCount", NewEventsController.getCountNewEvents);
-router.get("/:newEventId", NewEventsController.getOneNewEvent);
-router.post("/", requireAuth, NewEventsController.createNewEvent);
-router.patch("/:newEventId", requireAuth, NewEventsController.updateNewEvent);
-router.delete("/:newEventId", requireAuth, NewEventsController.deleteNewEvent);
+router.get("/count/:newEventCount", ErrorHandler, NewEventsController.getCountNewEvents);
+router.get("/:newEventId", ErrorHandler, NewEventsController.getOneNewEvent);
+router.post("/", ErrorHandler, requireAuth, NewEventsController.createNewEvent);
+router.patch("/:newEventId", ErrorHandler, requireAuth, NewEventsController.updateNewEvent);
+router.delete("/:newEventId", ErrorHandler, requireAuth, NewEventsController.deleteNewEvent);
 
 export default router;

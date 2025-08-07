@@ -54,18 +54,20 @@
         </style>
     </head>
     <body>
-        <form id="loginForm" class="login-form" action="/login" method="POST">
+        <form id="loginForm" class="login-form">
             <h2>Вхід</h2>
             <input
                 type="text"
-                name="username"
-                placeholder="Ім'я користувача"
+                name="email"
+                placeholder="Email"
+                value="pavlyk.dykyy@gmail.com"
                 required
             />
             <input
                 type="password"
                 name="password"
                 placeholder="Пароль"
+                value="13121989"
                 required
             />
             <input type="submit" value="Увійти" />
@@ -77,16 +79,16 @@
                     e.preventDefault();
                     const formData = new FormData(this);
                     const obj = Object.fromEntries(formData.entries());
-                    const response = await fetch("/login", {
+                    const response = await fetch("/user/login", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(obj),
                     });
 
                     if (response.ok) {
-                        window.location.href = "/view/index";
+                        window.location.href = "/view/newevents";
                     } else {
-                        aler("Error");
+                        alert("Error");
                     }
                 });
         </script>

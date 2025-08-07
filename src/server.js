@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path, { dirname } from "path";
+import { fileURLToPath } from 'url';
 
 import NewEventRouter from "./routes/NewEventsRoutes.js";
 import PastEventRouter from "./routes/PastEventsRoutes.js";
@@ -16,6 +18,11 @@ var corsOptions = {
     origin: "http://localhost:5173",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.use(express.json());
