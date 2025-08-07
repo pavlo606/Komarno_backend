@@ -13,7 +13,13 @@ const logout = async (callback) => {
     callback(data, error)
 }
 
+const getCurrentUser = async (callback) => {
+    const { data: { user }, error } = await supabase.auth.getUser()
+    callback(user, error)
+}
+
 export default {
     login,
     logout,
+    getCurrentUser,
 }

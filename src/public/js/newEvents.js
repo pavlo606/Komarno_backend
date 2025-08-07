@@ -119,31 +119,6 @@ newEventForm.addEventListener("submit", async function (e) {
         </div>
     `;
     }
-    // if (editMode && editElementId) {
-    //     const response = await fetch(`/newevents/${editElementId}`, {
-    //         method: "PATCH",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(obj),
-    //     });
-
-    //     if (response.ok) {
-    //         location.reload();
-    //     } else {
-    //         alert("Error");
-    //     }
-    // } else {
-    //     const response = await fetch("/newevents", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(obj),
-    //     });
-
-    //     if (response.ok) {
-    //         location.reload();
-    //     } else {
-    //         alert("Error");
-    //     }
-    // }
 });
 
 fetch("/newevents", { method: "GET" })

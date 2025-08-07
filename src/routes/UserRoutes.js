@@ -5,7 +5,7 @@ import { ErrorHandler } from "../middleware/ErrorHandler.js";
 const router = Router();
 
 router.post("/login", ErrorHandler, UserController.login);
-
-router.get("/logout", ErrorHandler, UserController.logout)
+router.get("/logout", ErrorHandler, UserController.logout);
+router.get("/", ErrorHandler, UserController.getCurrentUser);
 
 export default router;

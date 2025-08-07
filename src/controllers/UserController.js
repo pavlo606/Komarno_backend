@@ -24,7 +24,23 @@ const logout = async (_, res) => {
     });
 };
 
+const getCurrentUser = (_, res) => {
+    UserService.getCurrentUser((data, error) => {
+        if (!data) {
+            return res.status(500).send("No user")
+        }
+
+        if (error) {
+            console.error("Error: ", error);
+            return res.status(500).send(`Error: ${error.message}`);
+        }
+
+        return res.status(200).send(data);
+    })
+}
+
 export default {
     login,
     logout,
+    getCurrentUser,
 };

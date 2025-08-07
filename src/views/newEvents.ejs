@@ -10,9 +10,10 @@
         <link rel="stylesheet" href="/css/newEvents.css" />
         <link rel="stylesheet" href="/css/modal.css" />
         <link rel="stylesheet" href="/css/modalNewEvent.css" />
+        <link rel="stylesheet" href="/css/index.css" />
     </head>
     <body>
-        <a href="/view">На головну</a>
+        <%- include('./components/header') %>
         <div class="container">
             <form id="newEventForm" class="newevent-form">
                 <h2 id="formTitle">Створення нової майбутньої події</h2>
@@ -168,6 +169,7 @@
             </div>
         </div>
 
+        <script src="/js/index.js"></script>
         <script src="/js/dateFormatter.js"></script>
         <script src="/js/newEvents.js"></script>
         <script src="/js/modal.js"></script>
