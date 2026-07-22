@@ -42,5 +42,5 @@ app.use("/view", ViewRouter);
 app.use("/images", ImageRouter);
 
 app.listen(port, host, () => {
-    console.log(`Example app listening on http://${host}:${port}/`);
+    console.log(`App listening on http://${host}:${port}/`);
 });

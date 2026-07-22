@@ -8,12 +8,85 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="/css/pastEvents.css" />
     </head>
     <body>
         <%- include('./components/header') %>
         <div>
-            FUCK
+            <form id="pastEventForm" class="pastevent-form">
+                <h2 id="formTitle">Створення нової минулої події</h2>
+                <input
+                    id="title"
+                    type="text"
+                    name="title"
+                    placeholder="Заголовок"
+                    value="Грантові можливості для молоді у громаді"
+                    required
+                />
+                <textarea
+                    id="description"
+                    type="text"
+                    name="description"
+                    placeholder="Опис"
+                    rows="15"
+                    required
+                >
+Що найкраще підтверджує, що подія вдалася? Коли після тренінгу учасники підходять із запитаннями, обговорюють ідеї та вже планують свої перші грантові заявки! Саме так пройшла зустріч у межах проекту «Грантові можливості для молоді в громаді» у Комарнівській ТГ Львівської області.Обговорили, як молоді активісти можуть залучати фінансування на свої ініціативи, розвінчали міфи про гранти та розібралися, з чого почати.І що важливо – на події був присутній міський голова Ігор Іванович Черевичник, адже підтримка місцевої влади відіграє ключову роль у розвитку молодіжних проектів Що найкраще підтверджує, що подія вдалася? Коли після тренінгу учасники підходять із запитаннями, обговорюють ідеї та вже планують свої перші грантові заявки! Саме так пройшла зустріч у межах проекту «Грантові можливості для молоді в громаді» у Комарнівській ТГ Львівської області.</textarea
+                >
+                <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    value="2025-05-01"
+                    required
+                />
+                <input
+                    id="title_en"
+                    type="text"
+                    name="title_en"
+                    placeholder="Заголовок(англійська)"
+                    value="Grant opportunities for youth in the community"
+                    required
+                />
+                <textarea
+                    id="description_en"
+                    type="text"
+                    name="description_en"
+                    placeholder="Опис(англійська)"
+                    rows="15"
+                    required
+                >
+What best confirms that the event was a success? When after the training, participants come up with questions, discuss ideas and are already planning their first grant applications! This is how the meeting within the project “Grant Opportunities for Youth in the Community” took place in the Komarnivska TG of the Lviv region. We discussed how young activists can attract funding for their initiatives, debunked myths about grants and figured out where to start. And what is important – the event was attended by the mayor Ihor Ivanovych Cherevichnyk, because the support of local authorities plays a key role in the development of youth projects. What best confirms that the event was a success? When after the training, participants come up with questions, discuss ideas and are already planning their first grant applications! This is how the meeting within the project “Grant Opportunities for Youth in the Community” took place in the Komarnivska TG of the Lviv region.</textarea
+                >
+                <input
+                    accept="image/*"
+                    type="file"
+                    name="file"
+                    id="fileInput"
+                    multiple
+                />
+
+                <div class="image-preview" id="imagePreview"></div>
+
+                <input
+                    id="btnCreate"
+                    class="btn"
+                    type="submit"
+                    value="Створити"
+                />
+                <label
+                    >*Для правильного відображення в описі має бути НЕ більше
+                    ніж 6 рядків</label
+                >
+            </form>
+            <div
+                id="cardimagePreviewContainer"
+                class="cardimage-preview-container"
+            ></div>
         </div>
+
         <script src="/js/index.js"></script>
+        <script src="/js/dateFormatter.js"></script>
+        <script src="/js/pastEvents.js"></script>
     </body>
 </html>

@@ -35,11 +35,24 @@ const updatePastEvent = async (id, body, callback) => {
 };
 
 const deletePastEvent = async (id, callback) => {
+    const { data: pastEvent } = await supabase
+        .from("past_events")
+        .select()
+        .eq("id", id);
     const { error } = await supabase
         .from("past_events")
         .delete()
         .eq("id", id);
-    callback(null, error);
+    if (error) {
+        callback(null, error);
+        return
+    }
+
+    const { data, err } = await supabase
+        .storage
+        .from('images')
+        .remove(pastEvent[0].images_path)
+    callback(data, err);
 };
 
 export default {
